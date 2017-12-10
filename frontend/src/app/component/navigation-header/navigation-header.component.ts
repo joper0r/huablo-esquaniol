@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'navigation-header',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationHeaderComponent implements OnInit {
 
-  constructor() { }
+  email: string;
+  password: string;
+  searchString: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  public doLogin(): void {
+    console.log('Email: ' + this.email + ' Passwort:' + this.password);
+  }
+
+  public search(): void {
+    console.log('Search for: ' + this.searchString);
+  }
 }

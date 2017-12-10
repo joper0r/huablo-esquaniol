@@ -1,4 +1,13 @@
 .navigation-container {
   padding-left: 15px;
+  padding-right: 15px;
+}
 
+.searchField {
+  float: left;
+  width: 400px;
+
+  & > div, > div > input {
+    width: 100%;
+  }
 }
