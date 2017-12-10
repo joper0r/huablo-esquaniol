@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SearchUiComponent } from './component/search-ui/search-ui.component';
 import { FavoritesComponent } from './component/favorites/favorites.component';
 import { NavigationHeaderComponent } from './component/navigation-header/navigation-header.component';
+import {SearchService} from "./service/search.service";
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { NavigationHeaderComponent } from './component/navigation-header/navigat
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
