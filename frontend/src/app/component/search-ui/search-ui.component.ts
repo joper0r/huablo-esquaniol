@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from '../../service/search.service';
 
 @Component({
   selector: 'search-ui',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchUiComponent implements OnInit {
 
-  constructor() { }
+  results: any[];
+
+  constructor(public searchService: SearchService) {
+  }
 
   ngOnInit() {
+    this.searchService.getResults().subscribe(
+      results => this.results = results
+    );
+    console.log(this.results);
   }
 
 }

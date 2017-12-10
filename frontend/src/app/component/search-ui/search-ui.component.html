@@ -1,1 +1,25 @@
 <navigation-header></navigation-header>
+<div class="main-view-body">
+<div class="col-xs-2">
+  <p>Filter</p>
+  <p>Filter</p>
+  <p>Filter</p>
+  <p>Filter</p>
+  <p>Filter</p>
+  <p>Filter</p>
+  <p>Filter</p>
+</div>
+<div class="col-xs-8">
+  <div *ngFor="let result of results" class="result-container">
+    <div class="col-xs-2">
+      <img src="{{result.volumeInfo.imageLinks.smallThumbnail}}">
+    </div>
+    <div class="col-xs-10">
+      <h3>{{result.volumeInfo.title}}</h3>
+      <h5>{{result.volumeInfo.publishedDate}}</h5>
+      <h5>Preis: XX €</h5>
+    </div>
+  </div>
+</div>
+<div class="col-xs-2"></div>
+</div>
