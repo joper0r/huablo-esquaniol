@@ -2,13 +2,20 @@
   margin-top: 80px;
 }
 
-.result-container {
-  padding: 0 15px 15px 15px;
+.result- {
+  &container {
+    padding: 0 15px 15px 15px;
+    height: 250px;
 
-  &:after {
-    clear: both;
-    display: table;
-    content: ' ';
+    &:after {
+      clear: both;
+      display: table;
+      content: ' ';
+    }
+  }
+
+  &image {
+    width: 100%;
   }
 }
 

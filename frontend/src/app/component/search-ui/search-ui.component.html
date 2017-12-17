@@ -1,18 +1,14 @@
-<navigation-header></navigation-header>
+<navigation-header (search)="updateResults($event)"></navigation-header>
 <div class="main-view-body">
 <div class="col-xs-2">
-  <p>Filter</p>
-  <p>Filter</p>
-  <p>Filter</p>
-  <p>Filter</p>
-  <p>Filter</p>
-  <p>Filter</p>
-  <p>Filter</p>
+  <div *ngFor="let element of options; index as i" class="form-group">
+    <input type="checkbox" [checked]="element.selected" (change)="selection($event, i)">{{element.name}}: XX
+  </div>
 </div>
-<div class="col-xs-8">
+<div class="col-xs-10">
   <div *ngFor="let result of results" class="result-container">
     <div class="col-xs-2">
-      <img src="{{result.volumeInfo.imageLinks.smallThumbnail}}">
+      <img class="result-image" src="{{getImageSrc(result)}}">
     </div>
     <div class="col-xs-10">
       <h3>{{result.volumeInfo.title}}</h3>
@@ -21,5 +17,4 @@
     </div>
   </div>
 </div>
-<div class="col-xs-2"></div>
 </div>
