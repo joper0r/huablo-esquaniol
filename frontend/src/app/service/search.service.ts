@@ -16,7 +16,7 @@ export class SearchService {
   constructor(private http: HttpClient) {
   }
 
-  getResults(query: string, options: any[]): Observable<Response> {
+  getResults(query: string, options: any): Observable<Response> {
     const searchQuery = this.mapQuery(query) + this.mapOptions(options);
     return this.http.get<Response>(this.apiUrl + searchQuery + '&key=' + this.key);
   }
@@ -26,11 +26,11 @@ export class SearchService {
     return result.replace(' ', '+');
   }
 
-  mapOptions(options: any[]): string {
+  mapOptions(options: any): string {
     let isFirst: boolean = true;
     let result: string = '';
 
-    for (let option of options) {
+    for (let option of options.category) {
       if (option.selected) {
         if (!isFirst) {
           result += '+' + option.name.toLowerCase();
