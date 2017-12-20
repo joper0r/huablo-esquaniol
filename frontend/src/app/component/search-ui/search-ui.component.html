@@ -1,0 +1,37 @@
+<navigation-header (search)="updateResults($event)"></navigation-header>
+<div class="main-view-body">
+  <div class="col-xs-2">
+    <h1>Filter</h1>
+    <h2>Kategorien:</h2>
+    <div *ngFor="let element of filter.category; index as i" class="form-group">
+      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+    </div>
+    <h2>Delivery Option:</h2>
+    <div *ngFor="let element of filter.delivery; index as i" class="form-group">
+      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+    </div>
+    <h2>Format:</h2>
+    <div *ngFor="let element of filter.format; index as i" class="form-group">
+      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+    </div>
+    <h2>Preis:</h2>
+    <div *ngFor="let element of filter.price; index as i" class="form-group">
+      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}€
+    </div>
+    <h2>Authoren:</h2>
+    <span>Authoren</span>
+    <h2>Release:</h2>
+  </div>
+  <div class="col-xs-10">
+    <div *ngFor="let result of results" class="result-container">
+      <div class="col-xs-2">
+        <img class="result-image" src="{{getImageSrc(result)}}">
+      </div>
+      <div class="col-xs-10">
+        <h3>{{result.volumeInfo.title}}</h3>
+        <h5>{{result.volumeInfo.publishedDate}}</h5>
+        <h5>Preis: XX €</h5>
+      </div>
+    </div>
+  </div>
+</div>
