@@ -12,7 +12,15 @@ const client = new elasticsearch.Client({
 
 // create index
 client.indices.create({
-  index: index_name
+  index: index_name,
+  body: {
+    settings: {
+      index: {
+        number_of_shards: 1,
+        number_of_replicas: 1
+      }
+    }
+  }
 }, (e, r, s) => {
   console.log(r);
 });
