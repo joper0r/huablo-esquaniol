@@ -20,7 +20,6 @@ services:
       - esnet
     depends_on:
       - elasticsearch
-
   webapp:
     container_name: webapp
     build:
