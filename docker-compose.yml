@@ -21,16 +21,17 @@ services:
     depends_on:
       - elasticsearch
 
-  webapp:
-    container_name: webapp
-    build:
-      context: .
-      dockerfile: ./docker_frontend/Dockerfile
-    ports:
-      - 4200:4200
-    volumes:
-      - ./frontend:/var/www/html/frontend
-    networks:
-      - esnet
+#  webapp:
+#    container_name: webapp
+#    build:
+#      context: .
+#      dockerfile: ./docker_frontend/Dockerfile
+#    ports:
+#      - 4200:4200
+#      - 49153:49153
+#    volumes:
+#      - ./frontend:/var/www/html/frontend
+#    networks:
+#      - esnet
 networks:
   esnet:

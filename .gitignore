@@ -1588,3 +1588,5 @@ mysql/node_modules/.bin/mkdirp
 mysql/node_modules/performance-now/lib/performance-now.js
 mysql/node_modules/ecc-jsbn/test.js
 mysql/node_modules/is-fullwidth-code-point/readme.md
+
+mysql/node_modules
