@@ -1,4 +1,7 @@
 var mysql      = require('mysql');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -28,8 +31,10 @@ exports.login = function(req,res){
        
      
       if(results.length >0){
-      
-        if(results[0].user_pw == password){
+       
+
+        var check = bcrypt.compareSync(password, results[0].user_pw);
+        if(check){
            
           res.send({
             "code":200,
