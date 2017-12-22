@@ -10,6 +10,7 @@ import {Book} from '../../model/Book';
 export class SearchUiComponent implements OnInit {
 
   results: Book[];
+  tmpResults: Book[];
   filter = {
     category: [{name: 'Horror', type: 'category', selected: false},
       {name: 'Adventure Stories & Action', type: 'category', selected: false},
@@ -36,12 +37,21 @@ export class SearchUiComponent implements OnInit {
 
   searchString: string = ' ';
 
+  maxSize: number = 5;
+  totalItems: number = 0;
+  bigCurrentPage: number = 1;
+  numPages: number = 0;
+
   constructor(public searchService: SearchService) {
   }
 
   ngOnInit() {
     this.searchService.getResults('Harry Potter', this.filter).subscribe(
-      results => this.results = results.items
+      results => {
+        this.results = results.items.slice(0, 10);
+        this.tmpResults = results.items;
+        this.totalItems = results.items.length;
+      }
     );
   }
 
@@ -60,6 +70,10 @@ export class SearchUiComponent implements OnInit {
 
   public getImageSrc(result): string {
     return result.volumeInfo.imageLinks ? result.volumeInfo.imageLinks.smallThumbnail : 'assets/noImage.jpeg';
+  }
+
+  pageChanged(event: any): void {
+    this.results  = this.tmpResults.slice(event.page * 10 - 10, event.page * 10);
   }
 }
 

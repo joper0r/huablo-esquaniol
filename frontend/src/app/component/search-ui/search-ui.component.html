@@ -33,5 +33,11 @@
         <h5>Preis: XX €</h5>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-12 col-12">
+        <pagination [totalItems]="totalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm"
+                    [itemsPerPage]="10" [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
   </div>
 </div>

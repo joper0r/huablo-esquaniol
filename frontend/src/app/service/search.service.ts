@@ -18,7 +18,7 @@ export class SearchService {
 
   getResults(query: string, options: any): Observable<Response> {
     const searchQuery = this.mapQuery(query) + this.mapOptions(options);
-    return this.http.get<Response>(this.apiUrl + searchQuery + '&key=' + this.key);
+    return this.http.get<Response>(this.apiUrl + searchQuery + '&key=' + this.key + '&maxResults=40');
   }
 
   mapQuery(query: string): string {
