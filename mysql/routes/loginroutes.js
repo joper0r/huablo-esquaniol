@@ -14,19 +14,23 @@ if(!err) {
 });
 
 exports.login = function(req,res){
-    var user_name= req.body.user_name;
-    var user_pw = req.body.user_pw;
-    connection.query('SELECT * FROM user WHERE user_name = ?',[user_name], function (error, results, fields) {
+    var name= req.body.user_name;
+    var password = req.body.user_pw;
+    connection.query('SELECT * FROM user WHERE user_name = ?',[name], function (error, results, fields) {
     if (error) {
-      // console.log("error ocurred",error);
+      console.log("error ocurred",error);
       res.send({
         "code":400,
         "failed":"error ocurred"
       })
     }else{
-      // console.log('The solution is: ', results);
+       
+       
+     
       if(results.length >0){
-        if([0].user_pw == user_pw){
+      
+        if(results[0].user_pw == password){
+           
           res.send({
             "code":200,
             "success":"login sucessfull"
