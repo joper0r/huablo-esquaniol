@@ -6,7 +6,9 @@ services:
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     ports:
       - 9200:9200
     networks:
@@ -22,7 +24,7 @@ services:
       - elasticsearch
 
 #  webapp:
-#    container_name: webapp
+#    #container_name: webapp
 #    build:
 #      context: .
 #      dockerfile: ./docker_frontend/Dockerfile
