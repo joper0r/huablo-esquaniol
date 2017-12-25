@@ -28,9 +28,9 @@
         <img class="result-image" src="{{getImageSrc(result)}}">
       </div>
       <div class="col-xs-10">
-        <h3>{{result.volumeInfo.title}}</h3>
-        <h5>{{result.volumeInfo.publishedDate}}</h5>
-        <h5>Preis: XX €</h5>
+        <h3>{{result._source.title}}</h3>
+        <h5>{{result._source.publishedDate}}</h5>
+        <h5>Preis: {{result._source.price}} €</h5>
       </div>
     </div>
     <div class="row">

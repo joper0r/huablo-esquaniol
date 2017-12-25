@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  googleAPI: 'https://www.googleapis.com/books/v1/volumes?q=',
+  elasticAPI: 'http://localhost:9200/books/_search?=q='
 };

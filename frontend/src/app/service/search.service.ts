@@ -5,20 +5,21 @@ import {of} from 'rxjs/observable/of';
 import {HttpClient} from '@angular/common/http';
 import {Book} from '../model/Book';
 import {Response} from '../model/Response';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
 export class SearchService {
 
   key: string = 'AIzaSyDdMpdZYGDo1aRz1qnU5xWuFTPLuzGWlpU';
-  apiUrl: string = 'https://www.googleapis.com/books/v1/volumes?q=';
+  apiUrl: string = environment.elasticAPI;
 
   constructor(private http: HttpClient) {
   }
 
   getResults(query: string, options: any): Observable<Response> {
     const searchQuery = this.mapQuery(query) + this.mapOptions(options);
-    return this.http.get<Response>(this.apiUrl + searchQuery + '&key=' + this.key + '&maxResults=40');
+    return this.http.get<Response>(this.apiUrl + searchQuery);
   }
 
   mapQuery(query: string): string {

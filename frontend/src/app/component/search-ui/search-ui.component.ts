@@ -48,9 +48,9 @@ export class SearchUiComponent implements OnInit {
   ngOnInit() {
     this.searchService.getResults('Harry Potter', this.filter).subscribe(
       results => {
-        this.results = results.items.slice(0, 10);
-        this.tmpResults = results.items;
-        this.totalItems = results.items.length;
+        this.results = results.hits.hits.slice(0, 10);
+        this.tmpResults = results.hits.hits;
+        this.totalItems = results.hits.total;
       }
     );
   }
@@ -64,12 +64,12 @@ export class SearchUiComponent implements OnInit {
     this.searchString = searchString;
 
     this.searchService.getResults(searchString, this.filter).subscribe(
-      results => this.results = results.items
+      results => this.results = results.hits.hits
     );
   }
 
   public getImageSrc(result): string {
-    return result.volumeInfo.imageLinks ? result.volumeInfo.imageLinks.smallThumbnail : 'assets/noImage.jpeg';
+    return result._source.imageLinks ? result._source.imageLinks.smallThumbnail : 'assets/noImage.jpeg';
   }
 
   pageChanged(event: any): void {

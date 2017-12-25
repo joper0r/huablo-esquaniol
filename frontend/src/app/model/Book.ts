@@ -1,99 +1,37 @@
 export class Book {
-  kind: string;
-  id: string;
-  etag: string;
-  selfLink: string;
-  volumeInfo: {
-  title: string;
+  _index: string;
+  _type: string;
+  _id: string;
+  _score: number;
+  _source: {
+    id: string;
+    title: string;
     subtitle: string;
     authors: [
-    string
-  ];
+      string
+      ];
     publisher: string;
-    publishedDate: string;
+    publishedDate: number;
     description: string;
     industryIdentifiers: [
-    {
-      type: string;
-      identifier: string
-    }
-  ];
-    pageCount: number;
-    dimensions: {
-    height: string;
-      width: string;
-      thickness: string
-  };
-  printType: string;
-    mainCategory: string;
+      {
+        type:  string;
+        identifier: number;
+      }
+      ];
+    pageCount: 304;
+    printType: [
+      string
+      ];
     categories: [
-    string
-  ];
-    averageRating: number;
-    ratingsCount: number;
-    contentVersion: string;
+      string
+      ];
     imageLinks: {
-    smallThumbnail: string;
+      smallThumbnail: string;
       thumbnail: string;
-      small: string;
-      medium: string;
-      large: string;
-      extraLarge: string
+    };
+    language: string;
+    deliveryOption: string;
+    price: number;
   };
-  language: string;
-    previewLink: string;
-    infoLink: string;
-    canonicalVolumeLink: string
-};
-  saleInfo: {
-  country: string;
-    saleability: string;
-    onSaleDate: string;
-    isEbook: boolean;
-    listPrice: {
-    amount: number;
-      currencyCode: string
-  };
-  retailPrice: {
-    amount: number;
-      currencyCode: string
-  };
-  buyLink: string
-};
-  accessInfo: {
-  country: string;
-    viewability: string;
-    embeddable: boolean;
-    publicDomain: boolean;
-    textToSpeechPermission: string;
-    epub: {
-    isAvailable: boolean;
-      downloadLink: string;
-      acsTokenLink: string
-  };
-  pdf: {
-    isAvailable: boolean;
-      downloadLink: string;
-      acsTokenLink: string
-  };
-  webReaderLink: string;
-    accessViewStatus: string;
-    downloadAccess: {
-    kind: string;
-      volumeId: string;
-      restricted: boolean;
-      deviceAllowed: boolean;
-      justAcquired: boolean;
-      maxDownloadDevices: number;
-      downloadsAcquired: number;
-      nonce: string;
-      source: string;
-      reasonCode: string;
-      message: string;
-      signature: string
-  }
-};
-  searchInfo: {
-  textSnippet: string
-};
 }

@@ -8,9 +8,11 @@
              [typeahead]="autoCompleteRef"
              (typeaheadOnSelect)="searchEvent($event)"
              [typeaheadOptionsLimit]="7"
-             typeaheadOptionField="volumeInfo.title"
+             typeaheadOptionField="_source.title"
              [typeaheadWaitMs]="100"
-             [typeaheadMinLength]="1">
+             [typeaheadMinLength]="1"
+      class="form-control navbar-form"
+             (keyup.enter)="test()">
       <div *ngIf="typeaheadLoading===true">Loading</div>
       <div *ngIf="typeaheadNoResults===true">&#10060; No Results Found</div>
       <form class="navbar-form navbar-right">

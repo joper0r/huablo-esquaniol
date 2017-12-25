@@ -66,6 +66,10 @@ export class NavigationHeaderComponent implements OnInit {
   }
 
   public autoComplete(): Observable<Book[]> {
-    return this.searchService.getResults(this.query, this.filter).map(response => response.items);
+    return this.searchService.getResults(this.query, this.filter).map(response => response.hits.hits);
+  }
+
+  public test() {
+    console.log('hi');
   }
 }
