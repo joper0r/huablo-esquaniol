@@ -13,3 +13,7 @@ Kibana: localhost:5601
 
 index: books
 type: json
+
+### insert data
+
+nodejs insert_data.js
