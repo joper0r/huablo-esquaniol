@@ -1,17 +1,13 @@
-FROM ubuntu:16.04
+FROM node:latest
 
 RUN mkdir -p /var/www/html/frontend
 
 WORKDIR /var/www/html/frontend
 
-RUN apt-get update && apt-get install -y curl
-
-CMD /bin/bash
-
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
+ADD /* /var/www/html/frontend
 
 RUN npm -g config set user root
 
-RUN npm install -g @angular/cli
+RUN npm install
 
 CMD ng serve --host 0.0.0.0

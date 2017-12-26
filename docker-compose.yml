@@ -37,11 +37,11 @@ services:
     container_name: webapp
     build:
       context: .
-      dockerfile: ./docker_webapp/Dockerfile
-    ports:
-      - 4200:4200
+      dockerfile: ./frontend/Dockerfile
     volumes:
       - ./frontend:/var/www/html/frontend
+    ports:
+      - 4200:4200
     networks:
       - esnet
     depends_on:
