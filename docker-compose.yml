@@ -7,30 +7,32 @@ services:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    volumes:
-      - elasticData:/usr/share/elasticsearch/data
+  #  volumes:
+  #    - elasticData:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     networks:
       - esnet
-  sql:
-    container_name: sql
-    image: mysql/mysql-docker:5.7.20
+  mysql:
+    container_name: mysql
+    image: mysql/mysql-server:5.7.20
+    environment:
+      MYSQL_ROOT_PASSWORD: 'mysqlpassword'
     ports:
       - 3306:3306
     volumes:
       - sqlData:/var/lib/mysql
     networks:
       - esnet
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:6.1.1
-    ports:
-      - 5601:5601
-    networks:
-      - esnet
-    depends_on:
-      - elasticsearch
+#  kibana:
+#    container_name: kibana
+#    image: docker.elastic.co/kibana/kibana:6.1.1
+#    ports:
+#      - 5601:5601
+#    networks:
+#      - esnet
+#    depends_on:
+#      - elasticsearch
   webapp:
     container_name: webapp
     build:
@@ -44,10 +46,13 @@ services:
       - esnet
     depends_on:
       - elasticsearch
-      - sql
+      - mysql
 
 volumes:
-  - elasticData
-  - sqlData
+#  elasticData:
+#    driver: local
+  sqlData:
+    driver: local
+
 networks:
   esnet:
