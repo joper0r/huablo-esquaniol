@@ -6,13 +6,14 @@ docker-compose up
 
 ## URLS
 
-ES: localhost:9200
-Kibana: localhost:5601
+- ElasticSearch: localhost:9200
+- Kibana: localhost:5601
+- SQL: localhost:3306
 
 ## elasticsearch
 
-index: books
-type: json
+- index: books
+- type: json
 
 ### insert data
 
