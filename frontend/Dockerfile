@@ -6,6 +6,8 @@ WORKDIR /var/www/html/frontend
 
 RUN npm -g config set user root
 
+RUN npm install -g @angular/cli
+
 RUN npm install
 
 RUN npm update
