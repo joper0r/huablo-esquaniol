@@ -1,20 +1,31 @@
 # huablo-esquaniol
 
-## Start the Service
+### Start Services
 
 docker-compose up
 
-## URLS
+### Stop Services
+
+docker-compose down
+
+### Ports
 
 - ElasticSearch: localhost:9200
 - Kibana: localhost:5601
 - SQL: localhost:3306
+- Mysql: localhost:4200
 
-## elasticsearch
+### Elasticsearch
 
 - index: books
 - type: json
 
-### insert data
+### Data
 
-nodejs insert_data.js
+#### Insert Data into ES
+
+- nodejs insert_data.js
+
+### Configuration in Docker
+
+- set "vm.max_map_count=262144
