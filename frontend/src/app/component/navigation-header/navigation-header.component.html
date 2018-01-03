@@ -6,8 +6,8 @@
     <div id="navbar" class="navbar-collapse collapse">
       <form class="navbar-form searchField dropdown clearfix" (submit)="searchEvent()">
         <div class="form-group">
-          <input (input)="searchString = $event.target.value" type="text" placeholder="Ihre Suchanfrage"
-                 class="form-control" (keyup)="autoComplete()">
+          <input id="searchBar" (input)="searchString = $event.target.value" type="text" placeholder="Ihre Suchanfrage"
+                 class="form-control" (keyup)="autoComplete()" (blur)="hide()">
         </div>
         <div *ngIf="checkSuggestion()">
           <ul class="dropdown-menu" style="display: block" aria-labelledby="dropdownMenu1">

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {SearchService} from '../../service/search.service';
 import {Book} from '../../model/Book';
+import {element} from 'protractor';
 
 @Component({
   selector: 'navigation-header',
@@ -14,7 +15,7 @@ export class NavigationHeaderComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
   email: string;
   password: string;
-  searchString: string;
+  searchString: string = '';
 
   suggestions: Book[] = [];
 
@@ -31,12 +32,18 @@ export class NavigationHeaderComponent implements OnInit {
   }
 
   public searchEvent(): void {
-    console.log();
+    document.getElementById('searchBar').blur();
+    this.suggestions = [];
     this.search.emit(this.searchString);
   }
 
   public autoComplete(): void {
-    this.searchService.getResults(this.searchString, this.filter).subscribe(response => this.suggestions = response.hits.hits);
+    if (this.searchString.replace(/\s/g, '').length > 0) {
+      this.searchService.getResults(this.searchString, this.filter)
+        .subscribe(response => this.suggestions = response.hits.hits.slice(0, 5));
+    } else {
+      this.hide();
+    }
   }
 
   public searchEventDropdown(suggestion): void {
@@ -46,5 +53,9 @@ export class NavigationHeaderComponent implements OnInit {
 
   public checkSuggestion(): boolean {
     return this.suggestions.length > 0;
+  }
+
+  public hide(): void {
+    this.suggestions = [];
   }
 }
