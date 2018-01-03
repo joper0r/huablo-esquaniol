@@ -27,7 +27,7 @@ export class SearchUiComponent implements OnInit {
     format: [{name: 'Audiobook', type: 'format', selected: false},
       {name: 'Paperback', type: 'format', selected: false},
       {name: 'Hardcover', type: 'format', selected: false}],
-    price: [{name: '10', type: 'price', selected: false},
+    price: [{name: 0, type: 'price', selected: false},
       {name: 10, type: 'price', selected: false},
       {name: 20, type: 'price', selected: false},
       {name: 30, type: 'price', selected: false},

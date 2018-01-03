@@ -43,7 +43,11 @@ export class SearchService {
   mapOptions(options: any): void {
     for (let option of options.category) {
       if (option.selected) {
-        this.body.query.bool.filter.push({match_phrase: {categories: option.name.toLowerCase()}});
+        option.name = option.name.replace(/\s/g, '');
+        let tmpOptions = option.name.split('&');
+        for (let category of tmpOptions) {
+          this.body.query.bool.filter.push({match_phrase: {categories: category.toLowerCase()}});
+        }
       }
     }
 
