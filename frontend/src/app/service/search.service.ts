@@ -15,6 +15,8 @@ export class SearchService {
   key: string = 'AIzaSyDdMpdZYGDo1aRz1qnU5xWuFTPLuzGWlpU';
   apiUrl: string = environment.elasticAPI;
   body: any = {
+    from: 0,
+    size: 1000,
     query: {
       bool: {
         filter: []
@@ -33,8 +35,8 @@ export class SearchService {
   }
 
   mapQuery(query: string): void {
-    if (query !== '') {
-      this.body.query.bool.filter.push({match_phrase: {title: query.toLowerCase()}});
+    if (query.replace(/\s/g, '').length > 0) {
+      this.body.query.bool.filter.push({match_phrase_prefix: {title: query.toLowerCase()}});
     }
   }
 
@@ -42,6 +44,24 @@ export class SearchService {
     for (let option of options.category) {
       if (option.selected) {
         this.body.query.bool.filter.push({match_phrase: {categories: option.name.toLowerCase()}});
+      }
+    }
+
+    for (let option of options.delivery) {
+      if (option.selected) {
+        this.body.query.bool.filter.push({match_phrase: {deliveryOption: option.name.toLowerCase()}});
+      }
+    }
+
+    for (let option of options.format) {
+      if (option.selected) {
+        this.body.query.bool.filter.push({match_phrase: {printType: option.name.toLowerCase()}});
+      }
+    }
+
+    for (let option of options.price) {
+      if (option.selected) {
+        this.body.query.bool.filter.push({range: {price: {gte: option.name }}});
       }
     }
   }

@@ -14,7 +14,7 @@ export class SearchUiComponent implements OnInit {
   filter = {
     category: [{name: 'Horror', type: 'category', selected: false},
       {name: 'Adventure Stories & Action', type: 'category', selected: false},
-      {name: 'Science Fiction & Fantasy Novels', type: 'cathgory', selected: false},
+      {name: 'Fiction', type: 'category', selected: false},
       {name: 'Mystery & Thrillers', type: 'category', selected: false},
       {name: 'Science & Technology', type: 'category', selected: false},
       {name: 'Computers & Internet', type: 'category', selected: false},
@@ -28,11 +28,11 @@ export class SearchUiComponent implements OnInit {
       {name: 'Paperback', type: 'format', selected: false},
       {name: 'Hardcover', type: 'format', selected: false}],
     price: [{name: '10', type: 'price', selected: false},
-      {name: '10', type: 'price', selected: false},
-      {name: '20', type: 'price', selected: false},
-      {name: '30', type: 'price', selected: false},
-      {name: '40', type: 'price', selected: false},
-      {name: '50', type: 'price', selected: false}]
+      {name: 10, type: 'price', selected: false},
+      {name: 20, type: 'price', selected: false},
+      {name: 30, type: 'price', selected: false},
+      {name: 40, type: 'price', selected: false},
+      {name: 50, type: 'price', selected: false}]
   };
 
   searchString: string = ' ';
@@ -46,7 +46,7 @@ export class SearchUiComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchService.getResults('Harry Potter', this.filter).subscribe(
+    this.searchService.getResults('', this.filter).subscribe(
       results => {
         this.results = results.hits.hits.slice(0, 10);
         this.tmpResults = results.hits.hits;
@@ -64,7 +64,11 @@ export class SearchUiComponent implements OnInit {
     this.searchString = searchString;
 
     this.searchService.getResults(searchString, this.filter).subscribe(
-      results => this.results = results.hits.hits
+      results => {
+        this.results = results.hits.hits.slice(0, 10);
+        this.tmpResults = results.hits.hits;
+        this.totalItems = results.hits.total;
+      }
     );
   }
 
@@ -76,4 +80,3 @@ export class SearchUiComponent implements OnInit {
     this.results  = this.tmpResults.slice(event.page * 10 - 10, event.page * 10);
   }
 }
-
