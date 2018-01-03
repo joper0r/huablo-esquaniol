@@ -1,5 +1,5 @@
-<navigation-header (search)="updateResults($event)" [filter]="filter"></navigation-header>
-<div class="main-view-body">
+<navigation-header #navHeader (search)="updateResults($event)" [filter]="filter"></navigation-header>
+<div class="main-view-body" (click)="navHeader.hide()">
   <div class="col-xs-2">
     <h1>Filter</h1>
     <h2>Kategorien:</h2>

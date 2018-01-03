@@ -19,7 +19,8 @@ export class SearchService {
     size: 1000,
     query: {
       bool: {
-        filter: []
+        filter: [],
+        should: []
       }
     }
   };
@@ -29,6 +30,7 @@ export class SearchService {
 
   getResults(query: string, options: any): Observable<Response> {
     this.body.query.bool.filter = [];
+    this.body.query.bool.should = [];
     this.mapQuery(query);
     this.mapOptions(options);
     return this.http.post<Response>(this.apiUrl, this.body);
@@ -43,10 +45,9 @@ export class SearchService {
   mapOptions(options: any): void {
     for (let option of options.category) {
       if (option.selected) {
-        option.name = option.name.replace(/\s/g, '');
         let tmpOptions = option.name.split('&');
         for (let category of tmpOptions) {
-          this.body.query.bool.filter.push({match_phrase: {categories: category.toLowerCase()}});
+          this.body.query.bool.should.push({match_phrase: {categories: category.toLowerCase()}});
         }
       }
     }

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SearchService} from '../../service/search.service';
 import {Book} from '../../model/Book';
+import {NavigationHeaderComponent} from '../navigation-header/navigation-header.component';
 
 @Component({
   selector: 'search-ui',
@@ -8,6 +9,8 @@ import {Book} from '../../model/Book';
   styleUrls: ['./search-ui.component.scss']
 })
 export class SearchUiComponent implements OnInit {
+
+  @ViewChild('navHeader') navHeader;
 
   results: Book[];
   tmpResults: Book[];
