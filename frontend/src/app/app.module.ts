@@ -9,6 +9,8 @@ import { NavigationHeaderComponent } from './component/navigation-header/navigat
 import {SearchService} from './service/search.service';
 import {HttpClientModule} from '@angular/common/http';
 import {TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
+import {AppRoutingModule} from './app-routing.module';
+import {FavoriteService} from './service/favorite.service';
 
 
 @NgModule({
@@ -21,11 +23,12 @@ import {TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     TypeaheadModule.forRoot(),
     PaginationModule.forRoot(),
     FormsModule
   ],
-  providers: [SearchService],
+  providers: [SearchService, FavoriteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
