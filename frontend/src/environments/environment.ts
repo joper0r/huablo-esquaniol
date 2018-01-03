@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   googleAPI: 'https://www.googleapis.com/books/v1/volumes?q=title:',
-  elasticAPI: 'http://localhost:9200/books/_search'
+  elasticAPI: 'http://localhost:9200/books/_search',
+  apiEndpoint: 'http://localhost:9200/'
 };

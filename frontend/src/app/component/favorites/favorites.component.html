@@ -1,3 +1,18 @@
-<p>
-  favorites works!
-</p>
+<div class="col-xs-12">
+  <div *ngFor="let result of results" class="result-container">
+    <div class="col-xs-2">
+      <img class="result-image" src="{{getImageSrc(result)}}">
+    </div>
+    <div class="col-xs-10">
+      <h3>{{result._source.title}}</h3>
+      <h5>{{result._source.publishedDate}}</h5>
+      <h5>Preis: {{result._source.price}} €</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [totalItems]="totalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" class="pagination-sm"
+                  [itemsPerPage]="10" [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
+</div>
