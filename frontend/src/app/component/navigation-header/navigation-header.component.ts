@@ -31,12 +31,14 @@ export class NavigationHeaderComponent implements OnInit {
     console.log('Email: ' + this.email + ' Passwort:' + this.password);
   }
 
+  // Emits a search event
   public searchEvent(): void {
     document.getElementById('searchBar').blur();
     this.suggestions = [];
     this.search.emit(this.searchString);
   }
 
+  // Triggers a search and update suggestions for the user
   public autoComplete(): void {
     if (this.searchString.replace(/\s/g, '').length > 0) {
       this.searchService.getResults(this.searchString, this.filter)
@@ -46,15 +48,18 @@ export class NavigationHeaderComponent implements OnInit {
     }
   }
 
+  // Emits a search event with the selected autocomplete suggestion
   public searchEventDropdown(suggestion): void {
     this.suggestions = [];
     this.search.emit(suggestion);
   }
 
+  // check if the suggestions are empty
   public checkSuggestion(): boolean {
     return this.suggestions.length > 0;
   }
 
+  // clears the suggestions
   public hide(): void {
     this.suggestions = [];
   }

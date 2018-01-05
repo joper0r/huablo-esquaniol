@@ -48,6 +48,7 @@ export class SearchUiComponent implements OnInit {
   constructor(public searchService: SearchService) {
   }
 
+  // Initial search to fill the page
   ngOnInit() {
     this.searchService.getResults('', this.filter).subscribe(
       results => {
@@ -58,11 +59,13 @@ export class SearchUiComponent implements OnInit {
     );
   }
 
+  // updates the filter and calls the search function
   public selection(event, index, type): void {
     this.filter[type][index].selected = event.target.checked;
     this.updateResults(this.searchString);
   }
 
+  // calls the search service to update the website results
   public updateResults(searchString): void {
     this.searchString = searchString;
 
@@ -75,10 +78,12 @@ export class SearchUiComponent implements OnInit {
     );
   }
 
+  // check if the response contains an image source else returns an fallback
   public getImageSrc(result): string {
     return result._source.imageLinks ? result._source.imageLinks.smallThumbnail : 'assets/noImage.jpeg';
   }
 
+  // changes the results on a page change
   pageChanged(event: any): void {
     this.results  = this.tmpResults.slice(event.page * 10 - 10, event.page * 10);
   }

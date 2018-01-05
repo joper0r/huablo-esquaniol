@@ -1,12 +1,8 @@
 import {Injectable} from '@angular/core';
-import {RESULTS} from '../mock/mock-response';
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Book} from '../model/Book';
+import {HttpClient} from '@angular/common/http';
 import {Response} from '../model/Response';
 import {environment} from '../../environments/environment';
-import {RequestOptions} from '@angular/http';
 
 
 @Injectable()
@@ -28,6 +24,7 @@ export class SearchService {
   constructor(private http: HttpClient) {
   }
 
+  // Sends a post request with the filter options to the backend and returns the response as an Observable
   getResults(query: string, options: any): Observable<Response> {
     this.body.query.bool.filter = [];
     this.body.query.bool.should = [];
@@ -36,12 +33,14 @@ export class SearchService {
     return this.http.post<Response>(this.apiUrl, this.body);
   }
 
+  // Maps the search query into the query object
   mapQuery(query: string): void {
     if (query.replace(/\s/g, '').length > 0) {
       this.body.query.bool.filter.push({match_phrase_prefix: {title: query.toLowerCase()}});
     }
   }
 
+  // Maps the search options into the query Object
   mapOptions(options: any): void {
     for (let option of options.category) {
       if (option.selected) {
