@@ -1,4 +1,4 @@
-<navigation-header #navHeader (search)="updateResults($event)" [filter]="filter"></navigation-header>
+<navigation-header #navHeader (search)="updateResults($event)" [filter]="filter" [pageMain]="true"></navigation-header>
 <div class="main-view-body" (click)="navHeader.hide()">
   <div class="col-xs-2">
     <h1>Filter</h1>
@@ -24,7 +24,7 @@
     </div>
     <h2>Release:</h2>
     <form (submit)="updateResults(searchString)">
-    <div class="col-xs-10"><input class="form-control" type="text" (input)="filter.release.name = $event.target.value" (keyup)="updateReleaseFilter()"></div>
+    <div class="col-xs-10"><input class="form-control" type="text" (input)="filter.release.name = $event.target.value" (keyup)="updateReleaseFilter()" maxlength="4"></div>
     <div class="col-xs-2"><button type="submit">GO</button></div>
     </form>
   </div>

@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="#">Facettensuche</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form searchField dropdown clearfix" (submit)="searchEvent()">
+      <form *ngIf="hasSearch" class="navbar-form searchField dropdown clearfix" (submit)="searchEvent()">
         <div class="form-group">
           <input id="searchBar" (input)="searchString = $event.target.value" type="text" placeholder="Ihre Suchanfrage"
                  class="form-control" (keyup)="autoComplete()">
@@ -16,15 +16,17 @@
           </ul>
         </div>
       </form>
-      <form class="navbar-form navbar-right">
+      <form *ngIf="!isLoggedIn()" class="navbar-form navbar-right">
         <div class="form-group">
-          <input (input)="email = $event.target.value" type="text" placeholder="Email" class="form-control">
+          <input (input)="username = $event.target.value" type="text" placeholder="Username" class="form-control">
         </div>
         <div class="form-group">
           <input (input)="password = $event.target.value" type="password" placeholder="Password" class="form-control">
         </div>
         <button (click)="doLogin()" class="btn btn-success">Sign in</button>
       </form>
+      <div *ngIf="isLoggedIn() && pageMain" class="navbar-right"><ul class="nav nav-pills facet-tab"><li><a routerLink="/favorites">Meine Favoriten</a></li></ul></div>
+      <div *ngIf="isLoggedIn() && !pageMain" class="navbar-right"><ul class="nav nav-pills facet-tab"><li><a routerLink="/main">Hauptseite</a></li></ul></div>
     </div><!--/.navbar-collapse -->
   </div>
 </nav>

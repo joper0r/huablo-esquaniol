@@ -4,6 +4,8 @@ import 'rxjs/add/observable/of';
 import {SearchService} from '../../service/search.service';
 import {Book} from '../../model/Book';
 import {element} from 'protractor';
+import {LoginService} from '../../service/login.service';
+import has = Reflect.has;
 
 @Component({
   selector: 'navigation-header',
@@ -13,22 +15,32 @@ import {element} from 'protractor';
 export class NavigationHeaderComponent implements OnInit {
 
   @Output() search = new EventEmitter<string>();
-  email: string;
+  username: string;
   password: string;
   searchString: string = '';
+  loggedIn: boolean = false;
+  @Input() pageMain: boolean = true;
+  @Input() hasSearch: boolean = true;
 
   suggestions: Book[] = [];
 
   @Input() filter: any;
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, private loginService: LoginService) {
   }
 
   ngOnInit() {
   }
 
   public doLogin(): void {
-    console.log('Email: ' + this.email + ' Passwort:' + this.password);
+
+   this.loginService.login(this.username, this.password).subscribe( response => {
+     if (response) {
+       this.loggedIn = true;
+     } else {
+       console.log('error');
+     }
+   });
   }
 
   // Emits a search event
@@ -62,5 +74,9 @@ export class NavigationHeaderComponent implements OnInit {
   // clears the suggestions
   public hide(): void {
     this.suggestions = [];
+  }
+
+  public isLoggedIn(): boolean {
+    return sessionStorage.getItem('loggedIn') === 'true';
   }
 }

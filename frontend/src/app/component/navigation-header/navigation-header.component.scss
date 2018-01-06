@@ -24,3 +24,13 @@
 .dropdown-link {
   cursor: pointer;
 }
+
+.facet-tab > li > a{
+  background-color: white;
+  margin-right: 10px;
+  margin-top: 5px;
+
+  &:hover {
+    background-color: #b6b8b8;
+  }
+}

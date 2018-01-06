@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {FavoriteService} from './service/favorite.service';
+import {LoginService} from './service/login.service';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import {FavoriteService} from './service/favorite.service';
     PaginationModule.forRoot(),
     FormsModule
   ],
-  providers: [SearchService, FavoriteService],
+  providers: [SearchService, FavoriteService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
