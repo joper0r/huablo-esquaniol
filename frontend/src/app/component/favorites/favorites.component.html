@@ -1,7 +1,7 @@
 <navigation-header #navHeader [hasSearch]="false" [pageMain]="false"></navigation-header>
 
 <div class="col-xs-12" style="margin-top: 80px;">
-  <div *ngFor="let result of results" class="result-container">
+  <div *ngFor="let result of results; index as i" class="result-container">
     <div class="col-xs-2">
       <img class="result-image" src="{{getImageSrc(result)}}">
     </div>
@@ -9,6 +9,8 @@
       <h3>{{result._source.title}}</h3>
       <h5>{{result._source.publishedDate}}</h5>
       <h5>Preis: {{result._source.price}} €</h5>
+      <p>Favorite: <i (click)="removeFavorite(result._source.id, i, result)"
+                      class="glyphicon glyphicon-star favorite-icon"></i></p>
     </div>
   </div>
   <div class="row">

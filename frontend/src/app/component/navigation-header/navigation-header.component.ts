@@ -15,6 +15,7 @@ import has = Reflect.has;
 export class NavigationHeaderComponent implements OnInit {
 
   @Output() search = new EventEmitter<string>();
+  @Output() login = new EventEmitter<boolean>();
   username: string;
   password: string;
   searchString: string = '';
@@ -37,6 +38,7 @@ export class NavigationHeaderComponent implements OnInit {
    this.loginService.login(this.username, this.password).subscribe( response => {
      if (response) {
        this.loggedIn = true;
+       this.login.emit(true);
      } else {
        console.log('error');
      }

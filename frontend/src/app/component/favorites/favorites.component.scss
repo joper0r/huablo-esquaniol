@@ -1,0 +1,16 @@
+.result- {
+  &container {
+    padding: 0 15px 15px 15px;
+    height: 250px;
+
+    &:after {
+      clear: both;
+      display: table;
+      content: ' ';
+    }
+  }
+
+  &image {
+    max-width: 100%;
+  }
+}

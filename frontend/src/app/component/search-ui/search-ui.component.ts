@@ -3,6 +3,7 @@ import {SearchService} from '../../service/search.service';
 import {Book} from '../../model/Book';
 import {NavigationHeaderComponent} from '../navigation-header/navigation-header.component';
 import {Filter} from '../../model/Filter';
+import {FavoriteService} from '../../service/favorite.service';
 
 @Component({
   selector: 'search-ui',
@@ -23,13 +24,18 @@ export class SearchUiComponent implements OnInit {
   totalItems: number = 0;
   bigCurrentPage: number = 1;
   numPages: number = 0;
+  favorites: string[] = [];
+  loggedIn: boolean = false;
 
-  constructor(public searchService: SearchService) {
+  constructor(private searchService: SearchService, private favoriteService: FavoriteService ) {
   }
 
   // Initial search to fill the page
   ngOnInit() {
     this.updateResults(this.searchString);
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+      this.getFavorites();
+    }
   }
 
   // updates the filter and calls the search function
@@ -79,5 +85,37 @@ export class SearchUiComponent implements OnInit {
 
   updateReleaseFilter() {
     this.filter.release.selected = this.filter.release.name.replace(/\s/g, '').length > 0;
+  }
+
+  public checkFavorite(bookID: string): boolean {
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+      return this.favorites.indexOf(bookID) > -1;
+    } else {
+      return false;
+    }
+  }
+
+  public getFavorites(): void {
+    this.loggedIn = true;
+    this.favoriteService.getFavorites(sessionStorage.getItem('userID')).subscribe(
+      favorites => {
+        if (favorites.hits.hits[0] !== undefined) {
+          this.favorites = favorites.hits.hits[0]._source.bookID;
+        }
+      }
+    );
+  }
+
+  public toggleFavorite(bookId: string) {
+    let index = this.favorites.indexOf(bookId);
+
+    if (index > -1) {
+      console.log(this.favorites.splice(index, 1));
+      this.favorites.splice(index, 1);
+    } else {
+      this.favorites.push(bookId);
+    }
+
+    this.favoriteService.updateFavorites(sessionStorage.getItem('userID'), this.favorites);
   }
 }

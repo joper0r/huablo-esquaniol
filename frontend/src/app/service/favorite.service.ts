@@ -8,7 +8,6 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class FavoriteService {
 
-  userID: string = '12378';
   apiUrl: string = environment.apiEndpoint;
   body: any = {
     bookID: []
@@ -29,7 +28,7 @@ export class FavoriteService {
 
   // Sends a request with the UserID to the backend and returns the favorites as an Observable
   getFavorites(userID: string): Observable<any> {
-    return this.http.get(this.apiUrl + 'user/_search?q=_id:' + this.userID);
+    return this.http.get(this.apiUrl + 'user/_search?q=_id:' + userID);
   }
 
   // Sends a request with the favorites as a filter and returns an observable of the Books
@@ -42,7 +41,7 @@ export class FavoriteService {
   // Sends a PUT request to the Backend to update the favorites of the user
   updateFavorites(userID: string, favorites: string[]): void {
     this.body.bookID = favorites;
-    this.http.put<any>(this.apiUrl + '/user/favorites/' + this.userID, this.body);
+    this.http.put<any>(this.apiUrl + 'user/favorites/' + userID, this.body).subscribe();
   }
 
   // Maps the favorites into the query object
