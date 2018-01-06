@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
   });
 });
 //route to handle user registration
-router.post('/login', login.login)
+router.post('/login', login.login);
+router.post('/create', login.createUser);
 app.use('/api', router);
 app.listen(5000);
