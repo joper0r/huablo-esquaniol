@@ -17,13 +17,15 @@ services:
       - esnet
   mysql:
     container_name: mysql
-    image: mysql/mysql-server:5.7.20
+    image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 'mysqlpassword'
+      - MYSQL_DATABSE=booksapi
+      - MYSQL_ROOT_PASSWORD=agisnotamused
+      - MYSQL_ROOT_HOST=%
     ports:
       - 3306:3306
-    volumes:
-      - sqlData:/var/lib/mysql
+#    volumes:
+#      - sqlData:/var/lib/mysql
     networks:
       - esnet
 #  kibana:
@@ -35,21 +37,21 @@ services:
 #      - esnet
 #    depends_on:
 #      - elasticsearch
- webapp:
-   container_name: webapp
-   build:
-     context: .
-     dockerfile: ./frontend/Dockerfile
-   volumes:
-     - ./frontend:/var/www/html/frontend
-   ports:
-     - 4200:4200
-     - 49153:49153
-   networks:
-     - esnet
-   depends_on:
-     - elasticsearch
-     - mysql
+# webapp:
+#   container_name: webapp
+#   build:
+#     context: .
+#     dockerfile: ./frontend/Dockerfile
+#   volumes:
+#     - ./frontend:/var/www/html/frontend
+#   ports:
+#     - 4200:4200
+#     - 49153:49153
+#   networks:
+#     - esnet
+#   depends_on:
+#     - elasticsearch
+#     - mysql
 
 volumes:
 #  elasticData:
