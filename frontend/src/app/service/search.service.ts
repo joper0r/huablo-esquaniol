@@ -65,8 +65,19 @@ export class SearchService {
 
     for (let option of options.price) {
       if (option.selected) {
-        this.body.query.bool.filter.push({range: {price: {gte: option.name }}});
+        this.body.query.bool.filter.push({range: {price: {gte: option.name}}});
       }
+    }
+
+    for (let option of options.author) {
+      if (option.selected) {
+        this.body.query.bool.should.push({match_phrase: {authors: option.name.toLowerCase()}});
+      }
+    }
+
+    if (options.release.selected) {
+      this.body.query.bool.filter.push({range: {publishedDate: {gte: options.release.name, lte: options.release.name + '-12-31' , format: 'yyyy-MM-dd||yyyy'}}});
     }
   }
 }
+

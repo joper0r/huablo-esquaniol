@@ -19,5 +19,7 @@ export const Filter = {
     {name: 20, type: 'price', selected: false},
     {name: 30, type: 'price', selected: false},
     {name: 40, type: 'price', selected: false},
-    {name: 50, type: 'price', selected: false}]
+    {name: 50, type: 'price', selected: false}],
+  author: [],
+  release: {name: '', type: 'release', selected: false}
 };

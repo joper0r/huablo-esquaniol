@@ -17,7 +17,7 @@ export class SearchUiComponent implements OnInit {
   tmpResults: Book[];
   filter = Filter;
 
-  searchString: string = ' ';
+  searchString: string = '';
 
   maxSize: number = 5;
   totalItems: number = 0;
@@ -29,18 +29,17 @@ export class SearchUiComponent implements OnInit {
 
   // Initial search to fill the page
   ngOnInit() {
-    this.searchService.getResults('', this.filter).subscribe(
-      results => {
-        this.results = results.hits.hits.slice(0, 10);
-        this.tmpResults = results.hits.hits;
-        this.totalItems = results.hits.total;
-      }
-    );
+    this.updateResults(this.searchString);
   }
 
   // updates the filter and calls the search function
   public selection(event, index, type): void {
     this.filter[type][index].selected = event.target.checked;
+    this.updateResults(this.searchString);
+  }
+
+  public showAuthor(event, index, type): void {
+    this.filter[type][index].selected = true;
     this.updateResults(this.searchString);
   }
 
@@ -53,8 +52,19 @@ export class SearchUiComponent implements OnInit {
         this.results = results.hits.hits.slice(0, 10);
         this.tmpResults = results.hits.hits;
         this.totalItems = results.hits.total;
+        this.filter.author = this.getAuthors(this.tmpResults);
       }
     );
+  }
+
+  public getAuthors(searchResults): any[] {
+    let tmpAuthors = [];
+
+    for (let book of searchResults) {
+      tmpAuthors.push({name: book._source.authors[0], type: 'author', selected: false});
+    }
+
+    return tmpAuthors.slice(0, 10);
   }
 
   // check if the response contains an image source else returns an fallback
@@ -65,5 +75,9 @@ export class SearchUiComponent implements OnInit {
   // changes the results on a page change
   pageChanged(event: any): void {
     this.results  = this.tmpResults.slice(event.page * 10 - 10, event.page * 10);
+  }
+
+  updateReleaseFilter() {
+    this.filter.release.selected = this.filter.release.name.replace(/\s/g, '').length > 0;
   }
 }

@@ -19,8 +19,14 @@
       <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}€
     </div>
     <h2>Authoren:</h2>
-    <span>Authoren</span>
+    <div *ngFor="let element of filter.author; index as i" class="form-group">
+      <li class="author-link"><a (click)="showAuthor($event, i, element.type)">{{element.name}}</a></li>
+    </div>
     <h2>Release:</h2>
+    <form (submit)="updateResults(searchString)">
+    <div class="col-xs-10"><input class="form-control" type="text" (input)="filter.release.name = $event.target.value" (keyup)="updateReleaseFilter()"></div>
+    <div class="col-xs-2"><button type="submit">GO</button></div>
+    </form>
   </div>
   <div class="col-xs-10">
     <div *ngFor="let result of results" class="result-container">
