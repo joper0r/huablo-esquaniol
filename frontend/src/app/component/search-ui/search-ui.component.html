@@ -1,4 +1,4 @@
-<navigation-header #navHeader (login)="getFavorites()" (search)="updateResults($event)" [filter]="filter" [pageMain]="true"></navigation-header>
+<navigation-header #navHeader (login)="getFavorites()" (search)="updateResults($event)" [filter]="searchFilter" [pageMain]="true"></navigation-header>
 <div class="main-view-body" (click)="navHeader.hide()">
   <div class="col-xs-2">
     <h1>Filter</h1>

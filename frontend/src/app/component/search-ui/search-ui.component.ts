@@ -49,6 +49,8 @@ export class SearchUiComponent implements OnInit {
       this.searchFilter[type] = this.filter[type][index];
     } else if (checked) {
       this.searchFilter[type] = this.filter[type][index];
+    } else {
+      delete this.searchFilter[type];
     }
 
     this.updateResults(this.searchString);
@@ -84,6 +86,23 @@ export class SearchUiComponent implements OnInit {
 
     return tmpAuthors.slice(0, 10);
   }
+
+  // public getPrices(searchResults): any[] {
+  //   let tmpPrices = [];
+  //   let prices = [0, 10, 20, 30, 40, 50, 60, 70, 80];
+  //
+  //   for (let price of prices) {
+  //     let filter = searchResults.filter(function (el) {
+  //       return el._source.price > price && el._source.price < (price + 10);
+  //     });
+  //
+  //     if (filter.length > 0) {
+  //       tmpPrices.push({name: price, type: 'price', selected: false});
+  //     }
+  //   }
+  //
+  //   return tmpPrices;
+  // }
 
   // check if the response contains an image source else returns an fallback
   public getImageSrc(result): string {
