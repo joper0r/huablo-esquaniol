@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8
 
 RUN mkdir -p /var/www/html/frontend
 
@@ -6,12 +6,12 @@ WORKDIR /var/www/html/frontend
 
 RUN npm -g config set user root
 
-RUN npm install -g @angular/cli
+COPY frontend/package.json /var/www/html/frontend
 
 RUN npm install
 
-RUN npm update
+COPY frontend/. /var/www/html/frontend
 
-RUN echo 'alias ng="~/npm-global/bin/ng" ' >> ~/.bashrc
+RUN npm install -g @angular/cli
 
-CMD ng serve
+CMD ng serve --host 0.0.0.0
