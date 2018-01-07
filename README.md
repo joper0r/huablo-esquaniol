@@ -62,18 +62,9 @@ put localhost:9200/User/_mapping/favorites
 }
 ```
 
-### Inhalt User Favorites
+### Login
 
-Ein Array von Book ID's, die dann mit einem call mit should jedes dieser Bücher zurückgegen (Oder-Verknüpfung) 
+Connect to MYSQL-Server and insert the DUMB-File
 
-get localhost:9200/user/_search?q=_id:12378
+Start the server: mysql/server.js
 
-```
-_source": {
-    "bookID": [
-        "4yoXCgAAQBAJ",
-        "bT5suOONXlgC",
-        "CFR1CAAAQBAJ"
-    ]
-}
-```

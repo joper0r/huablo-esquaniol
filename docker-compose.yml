@@ -37,23 +37,23 @@ services:
 #      - esnet
 #    depends_on:
 #      - elasticsearch
-#  webapp:
-#    container_name: webapp
-#    build:
-#      context: .
-#      dockerfile: ./frontend/Dockerfile
-#    ports:
-#      - 4200:4200
-#      - 49153:49153
-#    networks:
-#      - esnet
-#    depends_on:
-#      - elasticsearch
-#      - mysql
+  webapp:
+    container_name: webapp
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - 4200:4200
+      - 49153:49153
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+      - mysql
 
 volumes:
-#  elasticData:
-#    driver: local
+  elasticData:
+    driver: local
   sqlData:
     driver: local
 
