@@ -42,42 +42,38 @@ export class SearchService {
 
   // Maps the search options into the query Object
   mapOptions(options: any): void {
-    for (let option of options.category) {
-      if (option.selected) {
-        let tmpOptions = option.name.split('&');
-        for (let category of tmpOptions) {
-          this.body.query.bool.should.push({match_phrase: {categories: category.toLowerCase()}});
-        }
-      }
-    }
 
-    for (let option of options.delivery) {
-      if (option.selected) {
-        this.body.query.bool.filter.push({match_phrase: {deliveryOption: option.name.toLowerCase()}});
+    for (let option in options) {
+      switch (option) {
+        case 'category':
+          let tmpOptions = options[option].name.split('&');
+          for (let category of tmpOptions) {
+            this.body.query.bool.should.push({match_phrase: {categories: category.toLowerCase()}});
+          }
+          break;
+        case 'delivery':
+          this.body.query.bool.filter.push({match_phrase: {deliveryOption: options[option].name.toLowerCase()}});
+          break;
+        case 'format':
+          this.body.query.bool.filter.push({match_phrase: {printType: options[option].name.toLowerCase()}});
+          break;
+        case 'author':
+          this.body.query.bool.filter.push({match_phrase: {authors: options[option].name.toLowerCase()}});
+          break;
+        case 'price':
+          this.body.query.bool.filter.push({range: {price: {gte: options[option].name}}});
+          break;
+        case 'release':
+          this.body.query.bool.filter.push({
+            range: {
+              publishedDate: {
+                gte: options[option].name,
+                lte: options[option].name + '-12-31', format: 'yyyy-MM-dd||yyyy'
+              }
+            }
+          });
+          break;
       }
-    }
-
-    for (let option of options.format) {
-      if (option.selected) {
-        this.body.query.bool.filter.push({match_phrase: {printType: option.name.toLowerCase()}});
-      }
-    }
-
-    for (let option of options.price) {
-      if (option.selected) {
-        this.body.query.bool.filter.push({range: {price: {gte: option.name}}});
-      }
-    }
-
-    for (let option of options.author) {
-      if (option.selected) {
-        this.body.query.bool.should.push({match_phrase: {authors: option.name.toLowerCase()}});
-      }
-    }
-
-    if (options.release.selected) {
-      this.body.query.bool.filter.push({range: {publishedDate: {gte: options.release.name, lte: options.release.name + '-12-31' , format: 'yyyy-MM-dd||yyyy'}}});
     }
   }
 }
-

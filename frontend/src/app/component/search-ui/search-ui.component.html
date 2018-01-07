@@ -4,23 +4,19 @@
     <h1>Filter</h1>
     <h2>Kategorien:</h2>
     <div *ngFor="let element of filter.category; index as i" class="form-group">
-      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+      <input type="checkbox" [checked]="element.selected" [(ngModel)]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
     </div>
     <h2>Delivery Option:</h2>
     <div *ngFor="let element of filter.delivery; index as i" class="form-group">
-      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+      <input type="checkbox" [checked]="element.selected" [(ngModel)]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
     </div>
     <h2>Format:</h2>
     <div *ngFor="let element of filter.format; index as i" class="form-group">
-      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+      <input type="checkbox" [checked]="element.selected" [(ngModel)]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
     </div>
     <h2>Preis:</h2>
     <div *ngFor="let element of filter.price; index as i" class="form-group">
-      <input type="checkbox" [checked]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}€
-    </div>
-    <h2>Authoren:</h2>
-    <div *ngFor="let element of filter.author; index as i" class="form-group">
-      <li class="author-link"><a (click)="showAuthor($event, i, element.type)">{{element.name}}</a></li>
+      <input type="checkbox" [checked]="element.selected" [(ngModel)]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}€
     </div>
     <h2>Release:</h2>
     <form (submit)="updateResults(searchString)">
@@ -30,6 +26,10 @@
         <button type="submit">GO</button>
       </div>
     </form>
+    <h2>Authoren:</h2>
+    <div *ngFor="let element of filter.author; index as i" class="form-group">
+      <input type="checkbox" [checked]="element.selected" [(ngModel)]="element.selected" (change)="selection($event, i, element.type)">{{element.name}}
+    </div>
   </div>
   <div class="col-xs-10">
     <div *ngFor="let result of results" class="result-container">

@@ -17,6 +17,7 @@ export class SearchUiComponent implements OnInit {
   results: Book[];
   tmpResults: Book[];
   filter = Filter;
+  searchFilter = {};
 
   searchString: string = '';
 
@@ -40,25 +41,36 @@ export class SearchUiComponent implements OnInit {
 
   // updates the filter and calls the search function
   public selection(event, index, type): void {
-    this.filter[type][index].selected = event.target.checked;
+    let checked: boolean = event.target.checked;
+    let indexFilter: number = this.filter[type].indexOf(this.searchFilter[type]);
+
+    if (checked && indexFilter > -1) {
+      this.filter[type][indexFilter].selected = false;
+      this.searchFilter[type] = this.filter[type][index];
+    } else if (checked) {
+      this.searchFilter[type] = this.filter[type][index];
+    }
+
     this.updateResults(this.searchString);
   }
 
-  public showAuthor(event, index, type): void {
-    this.filter[type][index].selected = true;
-    this.updateResults(this.searchString);
+  public checkAuthor(): void {
+    if (this.filter.author.length === 1 && this.searchFilter['author'] !== undefined) {
+      this.filter.author[0].selected = true;
+    }
   }
 
   // calls the search service to update the website results
   public updateResults(searchString): void {
     this.searchString = searchString;
 
-    this.searchService.getResults(searchString, this.filter).subscribe(
+    this.searchService.getResults(searchString, this.searchFilter).subscribe(
       results => {
         this.results = results.hits.hits.slice(0, 10);
         this.tmpResults = results.hits.hits;
         this.totalItems = results.hits.total;
         this.filter.author = this.getAuthors(this.tmpResults);
+        this.checkAuthor();
       }
     );
   }
@@ -84,7 +96,11 @@ export class SearchUiComponent implements OnInit {
   }
 
   updateReleaseFilter() {
-    this.filter.release.selected = this.filter.release.name.replace(/\s/g, '').length > 0;
+    this.filter.release.selected = this.filter.release.name.replace(/\s/g, '').length === 4;
+
+    if (this.filter.release.selected) {
+      this.searchFilter['release'] = this.filter.release;
+    }
   }
 
   public checkFavorite(bookID: string): boolean {
