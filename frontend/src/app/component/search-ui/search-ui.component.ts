@@ -81,10 +81,12 @@ export class SearchUiComponent implements OnInit {
     let tmpAuthors = [];
 
     for (let book of searchResults) {
-      tmpAuthors.push({name: book._source.authors[0], type: 'author', selected: false});
+      if (book._source.authors[0] !== 'u') {
+        tmpAuthors.push({name: book._source.authors[0], type: 'author', selected: false});
+      }
     }
 
-    return tmpAuthors.slice(0, 10);
+    return tmpAuthors;
   }
 
   // public getPrices(searchResults): any[] {
@@ -117,8 +119,10 @@ export class SearchUiComponent implements OnInit {
   updateReleaseFilter() {
     this.filter.release.selected = this.filter.release.name.replace(/\s/g, '').length === 4;
 
-    if (this.filter.release.selected) {
+    if (this.filter.release.selected ) {
       this.searchFilter['release'] = this.filter.release;
+    } else {
+      delete this.searchFilter['release'];
     }
   }
 

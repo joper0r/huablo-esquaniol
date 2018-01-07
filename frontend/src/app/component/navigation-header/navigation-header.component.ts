@@ -64,6 +64,7 @@ export class NavigationHeaderComponent implements OnInit {
 
   // Emits a search event with the selected autocomplete suggestion
   public searchEventDropdown(suggestion): void {
+    document.getElementById('searchBar').value=suggestion;
     this.suggestions = [];
     this.search.emit(suggestion);
   }
