@@ -11,7 +11,6 @@ docker-compose down
 ### Ports
 
 - ElasticSearch: localhost:9200
-- Kibana: localhost:5601
 - SQL: localhost:3306
 - Webapp: localhost:4200
 
@@ -24,9 +23,12 @@ docker-compose down
 
 #### Insert Data into ES
 
+Vorher müssen die Services natürlich gestartet werden
 - nodejs insert_data.js
 
-### Configuration in Docker
+#### Configuration in Docker
+
+Extra configuration für den Fehlercode 137
 
 - set "vm.max_map_count=262144"
 
