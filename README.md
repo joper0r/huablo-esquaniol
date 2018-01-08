@@ -13,7 +13,7 @@ docker-compose down
 - ElasticSearch: localhost:9200
 - Kibana: localhost:5601
 - SQL: localhost:3306
-- Mysql: localhost:4200
+- Webapp: localhost:4200
 
 ### Elasticsearch
 
@@ -28,7 +28,7 @@ docker-compose down
 
 ### Configuration in Docker
 
-- set "vm.max_map_count=262144
+- set "vm.max_map_count=262144"
 
 
 ### Index USER
@@ -41,13 +41,13 @@ body:
 {
        "settings" : {
            "index" : {
-               "number_of_shards" : 3, 
-               "number_of_replicas" : 2 
+               "number_of_shards" : 3,
+               "number_of_replicas" : 2
            }
        }
    }
    ```
-   
+
 ### Mapping User Favorites
 
 put localhost:9200/User/_mapping/favorites
@@ -56,7 +56,7 @@ put localhost:9200/User/_mapping/favorites
 {
   "properties": {
     "bookID": {
-      "type": "text" 
+      "type": "text"
     }
   }
 }
@@ -67,4 +67,3 @@ put localhost:9200/User/_mapping/favorites
 Connect to MYSQL-Server and insert the DUMB-File
 
 Start the server: mysql/server.js
-

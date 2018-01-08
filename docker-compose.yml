@@ -28,20 +28,10 @@ services:
 #      - sqlData:/var/lib/mysql
     networks:
       - esnet
-#  kibana:
-#    container_name: kibana
-#    image: docker.elastic.co/kibana/kibana:6.1.1
-#    ports:
-#      - 5601:5601
-#    networks:
-#      - esnet
-#    depends_on:
-#      - elasticsearch
   webapp:
     container_name: webapp
     build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
+      context: ./frontend
     ports:
       - 4200:4200
       - 49153:49153
@@ -50,7 +40,6 @@ services:
     depends_on:
       - elasticsearch
       - mysql
-
 volumes:
   elasticData:
     driver: local
