@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="#">Facettensuche</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <form *ngIf="hasSearch" class="navbar-form searchField dropdown clearfix" (submit)="searchEvent()">
+      <form *ngIf="hasSearch && isLoggedIn()" class="navbar-form searchField dropdown clearfix" (submit)="searchEvent()">
         <div class="form-group">
           <input id="searchBar" (input)="searchString = $event.target.value" type="text" placeholder="Ihre Suchanfrage"
                  class="form-control" (keyup)="autoComplete()">

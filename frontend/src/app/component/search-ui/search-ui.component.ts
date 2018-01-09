@@ -33,8 +33,8 @@ export class SearchUiComponent implements OnInit {
 
   // Initial search to fill the page
   ngOnInit() {
-    this.updateResults(this.searchString);
     if (sessionStorage.getItem('loggedIn') === 'true') {
+      this.updateResults(this.searchString);
       this.getFavorites();
     }
   }
